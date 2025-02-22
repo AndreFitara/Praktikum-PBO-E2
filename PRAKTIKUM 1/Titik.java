@@ -1,48 +1,98 @@
 /*
 * Nama File : Titik.java
-* Deskripsi : Kelas yang merepresentasikan garis dengan dua titik sebagai ujungnya
+* Deskripsi : Berisi atribut dan method dalam class Titik
 * Pembuat   : Andre Fitara Agun Ni'am Muta'ali
-* Tanggal   : 21/02/2025
+* Tanggal   : 20/02/2025
 */
 
 public class Titik {
+    //**********ATRIBUT**********/
     private double absis;
-    private double ordinat;
+    private double ordinate;
+    private static int counterTitik = 0;
 
-    // Konstruktor tanpa parameter
-    public Titik() {
-        this.absis = 0;
-        this.ordinat = 0;
+    //**********METHOD**********/
+    // Konstruktor untuk membuat titik dengan nilai absis dan ordinat tertentu
+    public Titik(double absis, double ordinate) {
+        this.absis = absis;
+        this.ordinate = ordinate;
+        counterTitik++;
     }
 
-    // Konstruktor dengan parameter
-    public Titik(double absis, double ordinat) {
-        this.absis = absis;
-        this.ordinat = ordinat;
+    // Konstruktor untuk membuat titik (0,0)
+    public Titik() {
+        this(0, 0);
     }
 
     // Getter untuk absis
-    public double getAbis() {
+    public double getAbsis() {
         return absis;
     }
 
-    // Getter untuk ordinat
-    public double getOrdinat() {
-        return ordinat;
-    }
-
     // Setter untuk absis
-    public void setAbis(double absis) {
+    public void setAbsis(double absis) {
         this.absis = absis;
     }
 
-    // Setter untuk ordinat
-    public void setOrdinat(double ordinat) {
-        this.ordinat = ordinat;
+    // Getter untuk ordinat
+    public double getOrdinate() {
+        return ordinate;
     }
 
-    // Method untuk menampilkan koordinat
-    public void display() {
-        System.out.println("Titik(" + absis + ", " + ordinat + ")");
+    // Setter untuk ordinat
+    public void setOrdinate(double ordinate) {
+        this.ordinate = ordinate;
+    }
+
+    // Method untuk menggeser titik
+    public void geser(double x, double y) {
+        this.absis += x;
+        this.ordinate += y;
+    }
+
+    // Method untuk mendapatkan kuadran
+    public int getKuadran() {
+        if (absis > 0 && ordinate > 0) return 1;
+        else if (absis < 0 && ordinate > 0) return 2;
+        else if (absis < 0 && ordinate < 0) return 3;
+        else if (absis > 0 && ordinate < 0) return 4;
+        else return 0; // Jika titik berada pada sumbu
+    }
+
+    // Method untuk mendapatkan jarak dari pusat
+    public double getJarakPusat() {
+        return Math.sqrt(absis * absis + ordinate * ordinate);
+    }
+
+    // Method untuk mendapatkan jarak dari titik lain
+    public double getJarak(Titik T) {
+        double dx = this.absis - T.getAbsis();
+        double dy = this.ordinate - T.getOrdinate();
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    // Method untuk merefleksikan titik terhadap sumbu X
+    public void refleksiX() {
+        this.ordinate = -this.ordinate;
+    }
+
+    // Method untuk merefleksikan titik terhadap sumbu Y
+    public void refleksiY() {
+        this.absis = -this.absis;
+    }
+
+    // Method untuk mendapatkan refleksi terhadap sumbu X
+    public Titik getRefleksiX() {
+        return new Titik(this.absis, -this.ordinate);
+    }
+
+    // Method untuk mendapatkan refleksi terhadap sumbu Y
+    public Titik getRefleksiY() {
+        return new Titik(-this.absis, this.ordinate);
+    }
+
+    // Method untuk mendapatkan counterTitik
+    public static int getCounterTitik() {
+        return counterTitik;
     }
 }
