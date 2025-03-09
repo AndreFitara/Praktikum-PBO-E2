@@ -5,7 +5,20 @@
 * Tanggal   : 7/03/2025
 */
 
-public class Asersi2 {
+//class Lingkaran
+class Lingkaran{
+    private double jariJari;
+    public Lingkaran (double jariJari) {
+        this.jariJari = jariJari;
+    }
+    public double hitungKe1i1ing () {
+        double keliling = 2*Math.PI*jariJari;
+        return keliling;
+    }
+}
+
+//class Asersi2
+public class Asersi2{
     public static void main(String[] args) {
         double radius = -1.0;
         assert radius > 0 : "Radius harus lebih besar dari 0";
